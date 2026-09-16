@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨 대시보드</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <h1>🌤️ 날씨 대시보드</h1>
+            <p class="subtitle">실시간 날씨 정보를 확인하세요</p>
+        </header>
+
+        <!-- 검색 섹션 -->
+        <div class="search-section">
+            <input 
+                type="text" 
+                id="cityInput" 
+                class="search-input" 
+                placeholder="도시명을 입력하세요... (예: 서울, Seoul)"
+                onkeypress="handleKeyPress(event)"
+            >
+            <button class="search-btn" onclick="searchWeather()">🔍 검색</button>
+            <button class="location-btn" onclick="getCurrentLocation()">📍 현재 위치</button>
+        </div>
+
+        <!-- 로딩 스피너 -->
+        <div id="loader" class="loader hidden"></div>
+
+        <!-- 에러 메시지 -->
+        <div id="errorMessage" class="error-message hidden"></div>
+
+        <!-- 메인 날씨 정보 -->
+        <div id="mainWeather" class="main-weather hidden">
+            <div class="city-info">
+                <h2 id="cityName"></h2>
+                <p id="currentDate"></p>
+            </div>
+
+            <div class="weather-display">
+                <div class="temperature-section">
+                    <div class="weather-icon-large" id="weatherIconLarge"></div>
+                    <div class="temperature-info">
+                        <span id="temperature" class="temperature"></span>
+                        <span id="weatherDescription" class="description"></span>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="detail-label">체감 온도</span>
+                        <span id="feelsLike" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">습도</span>
+                        <span id="humidity" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">기압</span>
+                        <span id="pressure" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">풍속</span>
+                        <span id="windSpeed" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">구름</span>
+                        <span id="cloudiness" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">가시거리</span>
+                        <span id="visibility" class="detail-value"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 추가 정보 -->
+            <div class="additional-info">
+                <div class="info-card">
+                    <h3>☀️ 일출 / 일몰</h3>
+                    <p id="sunTimes"></p>
+                </div>
+                <div class="info-card">
+                    <h3>💧 강수량</h3>
+                    <p id="rainfall"></p>
+                </div>
+                <div class="info-card">
+                    <h3>🌡️ 온도 범위</h3>
+                    <p id="tempRange"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5일 예보 -->
+        <div id="forecast" class="forecast-section hidden">
+            <h3>5일 예보</h3>
+            <div id="forecastContainer" class="forecast-container"></div>
+        </div>
+
+        <!-- 즐겨찾기 도시 -->
+        <div class="favorites-section">
+            <h3>⭐ 즐겨찾기 도시</h3>
+            <div id="favoritesList" class="favorites-list"></div>
+            <button class="add-favorite-btn" onclick="toggleAddFavorite()">+ 즐겨찾기 추가</button>
+        </div>
+
+        <!-- 추가 즐겨찾기 폼 -->
+        <div id="addFavoriteForm" class="add-favorite-form hidden">
+            <input type="text" id="favoriteCityInput" placeholder="도시명 입력">
+            <button onclick="addFavorite()">추가</button>
+            <button onclick="toggleAddFavorite()" class="cancel-btn">취소</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
